@@ -12,10 +12,11 @@ namespace LibraryManagementSystem.Controllers
 			LMS = db;
 		}
 
-
 		public IActionResult Index()
 		{			
 			return View();
 		}
+
+
 	}
 }

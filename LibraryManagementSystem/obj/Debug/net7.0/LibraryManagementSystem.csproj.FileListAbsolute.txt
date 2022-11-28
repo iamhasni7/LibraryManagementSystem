@@ -68,3 +68,6 @@ C:\Users\hasni\source\repos\LibraryManagementSystem\LibraryManagementSystem\bin\
 C:\Users\hasni\source\repos\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\hasni\source\repos\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\hasni\source\repos\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\net7.0\LibraryManagementSystem.csproj.CopyComplete
+C:\Users\hasni\source\repos\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\net7.0\LibraryManagementSystem.RazorAssemblyInfo.cache
+C:\Users\hasni\source\repos\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\net7.0\LibraryManagementSystem.RazorAssemblyInfo.cs
+C:\Users\hasni\source\repos\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\net7.0\LibraryManagementSystem.staticwebassets.runtime.json
