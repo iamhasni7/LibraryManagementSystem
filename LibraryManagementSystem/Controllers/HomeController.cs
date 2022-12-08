@@ -1,22 +1,19 @@
-﻿using LibraryManagementSystem.Models;
-using Microsoft.AspNetCore.Mvc;
-using static LibraryManagementSystem.Models.LibraryManagementSystem;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementSystem.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly LibraryManagementSystemDbContext LMS;
-		public HomeController(LibraryManagementSystemDbContext db)
-		{
-			LMS = db;
-		}
-
+		[HttpGet]
 		public IActionResult Index()
 		{			
 			return View();
 		}
 
 
+		public IActionResult Login()
+		{
+			return View();
+		}
 	}
 }

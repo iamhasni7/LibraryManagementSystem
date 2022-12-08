@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using static LibraryManagementSystem.Models.LibraryManagementSystem;
 
 namespace LibraryManagementSystem.Models
 {
@@ -10,10 +9,11 @@ namespace LibraryManagementSystem.Models
 
 		}
 
-		public DbSet<Book_Details> book_details { get; set; }
-		public DbSet<Category_Details> category_details { get; set; }
-		public DbSet<Shelf_Details> shelf_details { get; set; }
-		public DbSet<User_Details> user_details { get; set; }
+		public DbSet<Book_Details> book { get; set; }
+		public DbSet<Category_Details> category { get; set; }
+		public DbSet<Shelf_Details> shelf { get; set; }
+		public DbSet<User_Details> user { get; set; }
 		public DbSet<Issued_Details> issued_details { get; set; }
+		public DbSet<Admin_Credentials> admin_credentials { get; set; }
 	}
 }

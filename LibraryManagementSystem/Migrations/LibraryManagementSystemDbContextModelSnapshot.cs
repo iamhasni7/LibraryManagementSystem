@@ -22,6 +22,54 @@ namespace LibraryManagementSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("LibraryManagementSystem.Models.Admin_Credentials", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("loginid")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("admin_credentials");
+                });
+
+            modelBuilder.Entity("LibraryManagementSystem.Models.Issued_Details", b =>
+                {
+                    b.Property<int>("issued_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("issued_id"));
+
+                    b.Property<int?>("book_id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("user_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("issued_id");
+
+                    b.HasIndex("book_id");
+
+                    b.HasIndex("user_id");
+
+                    b.ToTable("issued_details");
+                });
+
             modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Book_Details", b =>
                 {
                     b.Property<int>("book_id")
@@ -53,7 +101,7 @@ namespace LibraryManagementSystem.Migrations
 
                     b.HasIndex("shelf_id");
 
-                    b.ToTable("book_details");
+                    b.ToTable("book");
                 });
 
             modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Category_Details", b =>
@@ -70,30 +118,7 @@ namespace LibraryManagementSystem.Migrations
 
                     b.HasKey("category_id");
 
-                    b.ToTable("category_details");
-                });
-
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Issued_Details", b =>
-                {
-                    b.Property<int>("issued_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("issued_id"));
-
-                    b.Property<int?>("book_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("user_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("issued_id");
-
-                    b.HasIndex("book_id");
-
-                    b.HasIndex("user_id");
-
-                    b.ToTable("issued_details");
+                    b.ToTable("category");
                 });
 
             modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Shelf_Details", b =>
@@ -113,7 +138,7 @@ namespace LibraryManagementSystem.Migrations
 
                     b.HasKey("shelf_id");
 
-                    b.ToTable("shelf_details");
+                    b.ToTable("shelf");
                 });
 
             modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+User_Details", b =>
@@ -141,7 +166,24 @@ namespace LibraryManagementSystem.Migrations
 
                     b.HasKey("user_id");
 
-                    b.ToTable("user_details");
+                    b.ToTable("user");
+                });
+
+            modelBuilder.Entity("LibraryManagementSystem.Models.Issued_Details", b =>
+                {
+                    b.HasOne("LibraryManagementSystem.Models.LibraryManagementSystem+Book_Details", "Book_Details")
+                        .WithMany("Issued_Details")
+                        .HasForeignKey("book_id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("LibraryManagementSystem.Models.LibraryManagementSystem+User_Details", "User_Details")
+                        .WithMany("Issued_Details")
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Book_Details");
+
+                    b.Navigation("User_Details");
                 });
 
             modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Book_Details", b =>
@@ -159,23 +201,6 @@ namespace LibraryManagementSystem.Migrations
                     b.Navigation("Category_Details");
 
                     b.Navigation("Shelf_Details");
-                });
-
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Issued_Details", b =>
-                {
-                    b.HasOne("LibraryManagementSystem.Models.LibraryManagementSystem+Book_Details", "Book_Details")
-                        .WithMany("Issued_Details")
-                        .HasForeignKey("book_id")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("LibraryManagementSystem.Models.LibraryManagementSystem+User_Details", "User_Details")
-                        .WithMany("Issued_Details")
-                        .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Book_Details");
-
-                    b.Navigation("User_Details");
                 });
 
             modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Book_Details", b =>
