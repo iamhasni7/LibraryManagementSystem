@@ -1,4 +1,4 @@
-using LibraryManagementSystem.Models;
+using LibraryManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 

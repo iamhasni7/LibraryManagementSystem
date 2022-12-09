@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryManagementSystem.Migrations
 {
     [DbContext(typeof(LibraryManagementSystemDbContext))]
-    [Migration("20221125065016_migration2")]
-    partial class migration2
+    [Migration("20221208121154_mig6")]
+    partial class mig6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,32 @@ namespace LibraryManagementSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Book_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Admin_Credentials", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("loginid")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("admin_credentials");
+                });
+
+            modelBuilder.Entity("LibraryManagementSystem.Models.Book_Details", b =>
                 {
                     b.Property<int>("book_id")
                         .ValueGeneratedOnAdd()
@@ -56,10 +81,10 @@ namespace LibraryManagementSystem.Migrations
 
                     b.HasIndex("shelf_id");
 
-                    b.ToTable("book_details");
+                    b.ToTable("book");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Category_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Category_Details", b =>
                 {
                     b.Property<int>("category_id")
                         .ValueGeneratedOnAdd()
@@ -73,10 +98,10 @@ namespace LibraryManagementSystem.Migrations
 
                     b.HasKey("category_id");
 
-                    b.ToTable("category_details");
+                    b.ToTable("category");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Issued_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Issued_Details", b =>
                 {
                     b.Property<int>("issued_id")
                         .ValueGeneratedOnAdd()
@@ -99,7 +124,7 @@ namespace LibraryManagementSystem.Migrations
                     b.ToTable("issued_details");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Shelf_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Shelf_Details", b =>
                 {
                     b.Property<int>("shelf_id")
                         .ValueGeneratedOnAdd()
@@ -116,10 +141,10 @@ namespace LibraryManagementSystem.Migrations
 
                     b.HasKey("shelf_id");
 
-                    b.ToTable("shelf_details");
+                    b.ToTable("shelf");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+User_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.User_Details", b =>
                 {
                     b.Property<int>("user_id")
                         .ValueGeneratedOnAdd()
@@ -144,17 +169,17 @@ namespace LibraryManagementSystem.Migrations
 
                     b.HasKey("user_id");
 
-                    b.ToTable("user_details");
+                    b.ToTable("user");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Book_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Book_Details", b =>
                 {
-                    b.HasOne("LibraryManagementSystem.Models.LibraryManagementSystem+Category_Details", "Category_Details")
+                    b.HasOne("LibraryManagementSystem.Models.Category_Details", "Category_Details")
                         .WithMany("Book_Details")
                         .HasForeignKey("category_id")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("LibraryManagementSystem.Models.LibraryManagementSystem+Shelf_Details", "Shelf_Details")
+                    b.HasOne("LibraryManagementSystem.Models.Shelf_Details", "Shelf_Details")
                         .WithMany("Book_Details")
                         .HasForeignKey("shelf_id")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -164,14 +189,14 @@ namespace LibraryManagementSystem.Migrations
                     b.Navigation("Shelf_Details");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Issued_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Issued_Details", b =>
                 {
-                    b.HasOne("LibraryManagementSystem.Models.LibraryManagementSystem+Book_Details", "Book_Details")
+                    b.HasOne("LibraryManagementSystem.Models.Book_Details", "Book_Details")
                         .WithMany("Issued_Details")
                         .HasForeignKey("book_id")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("LibraryManagementSystem.Models.LibraryManagementSystem+User_Details", "User_Details")
+                    b.HasOne("LibraryManagementSystem.Models.User_Details", "User_Details")
                         .WithMany("Issued_Details")
                         .HasForeignKey("user_id")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -181,22 +206,22 @@ namespace LibraryManagementSystem.Migrations
                     b.Navigation("User_Details");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Book_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Book_Details", b =>
                 {
                     b.Navigation("Issued_Details");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Category_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Category_Details", b =>
                 {
                     b.Navigation("Book_Details");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+Shelf_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Shelf_Details", b =>
                 {
                     b.Navigation("Book_Details");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.LibraryManagementSystem+User_Details", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.User_Details", b =>
                 {
                     b.Navigation("Issued_Details");
                 });
